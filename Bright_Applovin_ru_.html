@@ -738,27 +738,13 @@ window.addEventListener("orientationchange", checkOrientation );
 
 function checkOrientation()
 {
-  if(screen.orientation){
-  var orientScreen = screen.orientation.angle;
-  }
   var orientWindow = window.orientation;
 
-  if(typeof orientWindow == "number"){
     if(orientWindow == 0 || orientWindow == 180) {
       setPortrate();
     }else{
       setLandscape();
     }
-    alert("window.orientation = " + orientWindow);
-  }else if(typeof orientScreen == "number"){
-    if(orientScreen == 0 || orientScreen == 180) {
-      setPortrate();
-    }else{
-      setLandscape();
-    }
-    alert("screen.orientation.angle = " + orientScreen);
-  }else{
-    alert("no orientation");
   }
 
   function setLandscape(){
@@ -807,27 +793,14 @@ function doReadyCheck()
     }
     else
     {
-        //Mraid is already ready so do your mraid related stuff here
         alert("MRAID READY");
-        //orientationchange event will only be added in case your SDK supports    orientationchange otherwise add
-        //window.addEventListener("orientationchange", Orientation);
         mraid.addEventListener("orientationchange", checkOrientation);
-        //This is not needed,why do you need to listen to stateChange as well, but its upto you if you want to do that
-        //mraid.addEventListener("stateChange", Orientation);
     }
 }
 
 function mraidIsReady(){
-    alert("MRAID READY");
-    //Remove the ready listener
     mraid.removeEventListener("ready", mraidIsReady);
-
-    //Now add mraid related listeners
-    //orientationchange even will only be added in case your SDK supports orientationchange otherwise add       //window.addEventListener("orientationchange", Orientation);
     mraid.addEventListener("orientationchange", checkOrientation);
-
-    //I don't know if you really need to do that this is un-necessary, so   every stateChange will trigger orientation check
-    //mraid.addEventListener("stateChange", Orientation);
 }
 
 doReadyCheck();
