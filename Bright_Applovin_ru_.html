@@ -610,13 +610,6 @@ body {
 	var present = document.getElementById("present");
 
 // START SCREEN
-document.addEventListener("DOMContentLoaded", function(){
-  checkOrientation();
-  countDown();
-
-  //startTesting();
-  //startEndScreen();
-});
 
 	function countDown() {
 		document.getElementById("startScreen").classList.remove('hide');
@@ -656,7 +649,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		document.getElementById("task-counter-text").innerHTML = 3;
 	}
 
-	function endCardAnimation(){
+  function endCardAnimation(){
 		if(card.classList.contains('card-hide')){
 			cardStart();
 		}else if (card.classList.contains('card-start')) {
@@ -734,19 +727,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 //MRAID
 
-window.addEventListener("orientationchange", checkOrientation );
-
-function checkOrientation()
-{
-  var orientWindow = window.orientation;
-
-    if(orientWindow == 0 || orientWindow == 180) {
-      setPortrate();
-    }else{
-      setLandscape();
-    }
-  }
-
   function setLandscape(){
     document.getElementById("progressBar").classList.add('hide');
     document.getElementById("titleBar").classList.add('hide');
@@ -783,7 +763,18 @@ function checkOrientation()
     document.getElementById("end-text").className = "end-text-pr";
     document.getElementById("endButton").className = "end-button-pr";
   }
-}
+
+
+function checkOrientation()
+{
+  var orientWindow = window.orientation;
+
+    if(orientWindow == 0 || orientWindow == 180) {
+      setPortrate();
+    }else{
+      setLandscape();
+    }
+  }
 
 function doReadyCheck()
 {
@@ -791,9 +782,7 @@ function doReadyCheck()
     {
         mraid.addEventListener("ready", mraidIsReady);
     }
-    else
-    {
-        alert("MRAID READY");
+    else{
         mraid.addEventListener("orientationchange", checkOrientation);
     }
 }
@@ -801,8 +790,11 @@ function doReadyCheck()
 function mraidIsReady(){
     mraid.removeEventListener("ready", mraidIsReady);
     mraid.addEventListener("orientationchange", checkOrientation);
-}
+    checkOrientation();
+    countDown();
 
+}
+console.log("LOL");
 doReadyCheck();
 
 function openSite(url){
