@@ -783,7 +783,7 @@ function doReadyCheck()
         mraid.addEventListener("ready", mraidIsReady);
     }
     else{
-        mraid.addEventListener("orientationchange", checkOrientation);
+        mraidIsReady();
     }
 }
 
@@ -792,9 +792,9 @@ function mraidIsReady(){
     mraid.addEventListener("orientationchange", checkOrientation);
     checkOrientation();
     countDown();
-
+    console.log("mraidIsReady");
 }
-console.log("LOL");
+
 doReadyCheck();
 
 function openSite(url){
