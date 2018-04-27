@@ -609,13 +609,6 @@ body {
 	var present = document.getElementById("present");
 
 // START SCREEN
-document.addEventListener("DOMContentLoaded", function(){
-  checkOrientation();
-  countDown();
-
-  //startTesting();
-  //startEndScreen();
-});
 
 	function countDown() {
 		document.getElementById("startScreen").classList.remove('hide');
@@ -733,29 +726,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
 //MRAID
 
-window.mraid.addEventListener("resize", checkOrientation );
-
-function checkOrientation()
-{
-  console.log("orientation");
-  if(screen.orientation){
-  var orientScreen = screen.orientation.angle;
-  }
-  var orientWindow = window.orientation;
-
-  if(typeof orientWindow == "number"){
-    if(orientWindow == 0 || orientWindow == 180) {
-      setPortrate();
-    }else{
-      setLandscape();
-    }
-  }else if(typeof orientScreen == "number"){
-    if(orientScreen == 0 || orientScreen == 180) {
-      setPortrate();
-    }else{
-      setLandscape();
-    }
-  }
 
   function setLandscape(){
     document.getElementById("progressBar").classList.add('hide');
@@ -800,6 +770,59 @@ function openSite(url)
 	mraid.open(url);
 }
 
+
+function checkOrientation()
+{
+  console.log("orientation");
+  if(screen.orientation){
+  var orientScreen = screen.orientation.angle;
+  }
+  var orientWindow = window.orientation;
+
+  if(typeof orientWindow == "number"){
+    if(orientWindow == 0 || orientWindow == 180) {
+      setPortrate();
+    }else{
+      setLandscape();
+    }
+  }else if(typeof orientScreen == "number"){
+    if(orientScreen == 0 || orientScreen == 180) {
+      setPortrate();
+    }else{
+      setLandscape();
+    }
+  }
+
+
+
+
+function mraidIsReady()
+  {
+  	mraid.removeEventListener("ready", mraidIsReady);
+
+  	showMyAd();
+  }
+function showMyAd()
+  {
+    checkOrientation();
+    countDown();
+    mraid.addEventListener("orientationchange", checkOrientation );
+  }  
+function doReadyCheck()
+{
+	if (mraid.getState() == 'loading')
+	{
+		updateElementInnerHTML("State", 'loading');
+
+		mraid.addEventListener("ready", mraidIsReady);
+	}
+	else
+	{
+		showMyAd();
+	}
+}
+
+doReadyCheck();
 </script>
 
 </body>
