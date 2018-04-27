@@ -797,20 +797,26 @@ function checkOrientation()
 
 function mraidIsReady()
   {
+    console.log("MRAID is ready!!");
   	mraid.removeEventListener("ready", mraidIsReady);
 
   	showMyAd();
   }
+
 function showMyAd()
   {
+    console.log("Start Banner");
     checkOrientation();
     countDown();
     mraid.addEventListener("orientationchange", checkOrientation );
   }
+
 function doReadyCheck()
 {
+  console.log("checking MRAID");
 	if (mraid.getState() == 'loading')
 	{
+    console.log("MRAID loading...");
 		updateElementInnerHTML("State", 'loading');
 
 		mraid.addEventListener("ready", mraidIsReady);
@@ -822,6 +828,7 @@ function doReadyCheck()
 }
 
 doReadyCheck();
+
 </script>
 
 </body>
