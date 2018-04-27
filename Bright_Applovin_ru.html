@@ -809,8 +809,6 @@ function doReadyCheck(){
 	if (mraid.getState() == 'loading')
 	{
     console.log("MRAID loading...");
-		updateElementInnerHTML("State", 'loading');
-
 		mraid.addEventListener("ready", mraidIsReady);
 	}
 	else
