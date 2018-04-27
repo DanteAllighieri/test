@@ -768,7 +768,8 @@ function openSite(url){
 }
 
 function checkOrientation(){
-  console.log("orientation");
+
+  console.log( this + "call Event " + event.type);
   if(screen.orientation){
   var orientScreen = screen.orientation.angle;
   }
@@ -802,6 +803,9 @@ function showMyAd(){
     checkOrientation();
     countDown();
     window.addEventListener("orientationchange", checkOrientation );
+    window.addEventListener("resize", checkOrientation );
+    mraid.addEventListener("orientationchange", checkOrientation );
+    mraid.addEventListener("resize", checkOrientation );
   }
 
 function doReadyCheck(){
