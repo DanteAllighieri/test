@@ -733,10 +733,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
 //MRAID
 
-mraid.addEventListener("resize", checkOrientation );
+window.mraid.addEventListener("orientationChange", checkOrientation );
 
 function checkOrientation()
 {
+  console.log("orientation");
   if(screen.orientation){
   var orientScreen = screen.orientation.angle;
   }
