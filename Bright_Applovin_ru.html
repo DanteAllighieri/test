@@ -727,7 +727,7 @@ body {
 //MRAID
 
 
-  function setLandscape(){
+function setLandscape(){
     document.getElementById("progressBar").classList.add('hide');
     document.getElementById("titleBar").classList.add('hide');
     card.style.height = "90%";
@@ -745,7 +745,7 @@ body {
     document.getElementById("end-text").className = "end-text-ls";
     document.getElementById("endButton").className = "end-button-ls";
   }
-  function setPortrate(){
+function setPortrate(){
     document.getElementById("progressBar").classList.remove('hide');
     document.getElementById("titleBar").classList.remove('hide');
     card.style.height = "70%";
@@ -763,15 +763,11 @@ body {
     document.getElementById("end-text").className = "end-text-pr";
     document.getElementById("endButton").className = "end-button-pr";
   }
-
-function openSite(url)
-{
+function openSite(url){
 	mraid.open(url);
 }
 
-
-function checkOrientation()
-{
+function checkOrientation(){
   console.log("orientation");
   if(screen.orientation){
   var orientScreen = screen.orientation.angle;
@@ -791,28 +787,24 @@ function checkOrientation()
       setLandscape();
     }
   }
+}
 
 
-
-
-function mraidIsReady()
-  {
+function mraidIsReady(){
     console.log("MRAID is ready!!");
   	mraid.removeEventListener("ready", mraidIsReady);
 
   	showMyAd();
   }
 
-function showMyAd()
-  {
+function showMyAd(){
     console.log("Start Banner");
     checkOrientation();
     countDown();
     mraid.addEventListener("orientationchange", checkOrientation );
   }
 
-function doReadyCheck()
-{
+function doReadyCheck(){
   console.log("checking MRAID");
 	if (mraid.getState() == 'loading')
 	{
