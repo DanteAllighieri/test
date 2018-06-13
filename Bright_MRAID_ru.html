@@ -207,7 +207,8 @@
 		</div>
 		<p class="end-result-pr" id="end-result">accuracy</p>
 		<p class="end-text-pr" id="end-text">result</p>
-		<div class="end-button-pr" id="endButton" onclick="javascript:openSite('https://itunes.apple.com/app/bright-english-for-beginners/id1258621855');">Забрать подарок</div>
+
+		<div class="end-button-pr" id="endButton" onclick="javascript:openSite(linkApp);">Забрать подарок</div>
 	</div>
 
 </div>
@@ -349,6 +350,7 @@ body {
   left: -23vh;
 }
 .startScreen{
+  width: 90%;
   margin: 0;
   position: absolute;
   top: 50%;
@@ -539,6 +541,7 @@ body {
 
 </style>
 
+<script src="mraid.js"></script>
 
 <script type="text/javascript">
 
@@ -588,10 +591,17 @@ body {
 				answer2: {label: "официант", correct: true}
 			}
 		];
-	var messageResult = {
+  var messageResult = {
 		good:"Молодец!<br>Держи 30 дней <br> английского в подарок",
 		bad:"Ты можешь лучше!<br>Держи 30 дней<br>английского в подарок"
 	}
+  var linkStores = {
+		ios:"https://itunes.apple.com/app/bright-english-for-beginners/id1258621855",
+		android:"https://play.google.com/store/apps/details?id=com.engbright"
+	}
+  if (getOS()=="iOS") linkApp = linkStores.ios;
+  if (getOS()=="Android") linkApp = linkStores.android;
+
 	countCard = words.length;
 	var cdInterval;
 
@@ -608,7 +618,57 @@ body {
 	var logo = document.getElementById("logo");
 	var present = document.getElementById("present");
 
-// START SCREEN
+  function getOS() {
+    var userAgent = window.navigator.userAgent,
+        platform = window.navigator.platform,
+        macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+        windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+        iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+        os = null;
+
+    if (macosPlatforms.indexOf(platform) !== -1) {
+      os = 'iOS'; //Mac
+    } else if (iosPlatforms.indexOf(platform) !== -1) {
+      os = 'iOS'; //iOS
+    } else if (windowsPlatforms.indexOf(platform) !== -1) {
+      os = 'Android'; //Windows
+    } else if (/Android/.test(userAgent)) {
+      os = 'Android'; //Android
+    } else if (!os && /Linux/.test(platform)) {
+      os = 'Android'; //Linux
+    }
+
+    return os;
+  }
+  // MRAID loading
+  function checkMRAID() {
+    if (mraid.getState() == 'loading')
+    {
+      mraid.addEventListener("ready", mraidIsReady);
+    }
+    else
+    {
+      startAd();
+    }
+    function mraidIsReady()
+    {
+      mraid.removeEventListener("ready", mraidIsReady);
+
+      startAd();
+    }
+  }
+
+  // START AD
+
+  function startAd(){
+    checkOrientation();
+    countDown();
+  }
+
+  //startAd();
+  checkMRAID();
+
+  // START SCREEN
 
 	function countDown() {
 		document.getElementById("startScreen").classList.remove('hide');
@@ -726,50 +786,10 @@ body {
 
 //MRAID
 
+window.addEventListener("orientationchange", checkOrientation );
 
-function setLandscape(){
-    document.getElementById("progressBar").classList.add('hide');
-    document.getElementById("titleBar").classList.add('hide');
-    card.style.height = "90%";
-    card.style.width = "70%";
-
-    answer1.style.height = answer2.style.height = "40px";
-    answer1.style.paddingTop = answer2.style.paddingTop = "16px";
-    answer1.style.bottom = "56px";
-    answer2.style.bottom = "0px";
-    document.getElementById("task-head").style.paddingBottom = "112px";
-
-    document.getElementById("logo").className = "logo-ls";
-    document.getElementById("present").className = "present-ls";
-    document.getElementById("end-result").className = "end-result-ls";
-    document.getElementById("end-text").className = "end-text-ls";
-    document.getElementById("endButton").className = "end-button-ls";
-  }
-function setPortrate(){
-    document.getElementById("progressBar").classList.remove('hide');
-    document.getElementById("titleBar").classList.remove('hide');
-    card.style.height = "70%";
-    card.style.width = "90%";
-
-    answer1.style.height = answer2.style.height = "44px";
-    answer1.style.paddingTop = answer2.style.paddingTop = "20px";
-    answer1.style.bottom = "64px";
-    answer2.style.bottom = "0px";
-    document.getElementById("task-head").style.paddingBottom = "128px";
-
-    document.getElementById("logo").className = "logo-pr";
-    document.getElementById("present").className = "present-pr";
-    document.getElementById("end-result").className = "end-result-pr";
-    document.getElementById("end-text").className = "end-text-pr";
-    document.getElementById("endButton").className = "end-button-pr";
-  }
-function openSite(url){
-	mraid.open(url);
-}
-
-function checkOrientation(){
-
-  console.log( this + "call Event " + event.type);
+function checkOrientation()
+{
   if(screen.orientation){
   var orientScreen = screen.orientation.angle;
   }
@@ -788,40 +808,49 @@ function checkOrientation(){
       setLandscape();
     }
   }
+
+  function setLandscape(){
+    document.getElementById("progressBar").classList.add('hide');
+    document.getElementById("titleBar").classList.add('hide');
+    card.style.height = "90%";
+    card.style.width = "70%";
+
+    answer1.style.height = answer2.style.height = "40px";
+    answer1.style.paddingTop = answer2.style.paddingTop = "16px";
+    answer1.style.bottom = "56px";
+    answer2.style.bottom = "0px";
+    document.getElementById("task-head").style.paddingBottom = "112px";
+
+    document.getElementById("logo").className = "logo-ls";
+    document.getElementById("present").className = "present-ls";
+    document.getElementById("end-result").className = "end-result-ls";
+    document.getElementById("end-text").className = "end-text-ls";
+    document.getElementById("endButton").className = "end-button-ls";
+  }
+  function setPortrate(){
+    document.getElementById("progressBar").classList.remove('hide');
+    document.getElementById("titleBar").classList.remove('hide');
+    card.style.height = "70%";
+    card.style.width = "90%";
+
+    answer1.style.height = answer2.style.height = "44px";
+    answer1.style.paddingTop = answer2.style.paddingTop = "20px";
+    answer1.style.bottom = "64px";
+    answer2.style.bottom = "0px";
+    document.getElementById("task-head").style.paddingBottom = "128px";
+
+    document.getElementById("logo").className = "logo-pr";
+    document.getElementById("present").className = "present-pr";
+    document.getElementById("end-result").className = "end-result-pr";
+    document.getElementById("end-text").className = "end-text-pr";
+    document.getElementById("endButton").className = "end-button-pr";
+  }
 }
 
-
-function mraidIsReady(){
-    console.log("MRAID is ready!!");
-  	mraid.removeEventListener("ready", mraidIsReady);
-
-  	showMyAd();
-  }
-
-function showMyAd(){
-    console.log("Start Banner");
-    checkOrientation();
-    countDown();
-    window.addEventListener("orientationchange", checkOrientation );
-    window.addEventListener("resize", checkOrientation );
-    mraid.addEventListener("orientationchange", checkOrientation );
-    mraid.addEventListener("resize", checkOrientation );
-  }
-
-function doReadyCheck(){
-  console.log("checking MRAID");
-	if (mraid.getState() == 'loading')
-	{
-    console.log("MRAID loading...");
-		mraid.addEventListener("ready", mraidIsReady);
-	}
-	else
-	{
-		showMyAd();
-	}
+function openSite(url)
+{
+	mraid.open(url);
 }
-
-doReadyCheck();
 
 </script>
 
