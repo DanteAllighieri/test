@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="adContainer" id="adContainer">
-	<div class="startScreen hide" id="startScreen">
+  <div class="startScreen hide" id="startScreen">
 		<div class="start-counter" id="start-counter">
 			<svg viewBox="0 0 104 104">
 				<circle id="start-bg-circle" r="50" cx="52" cy="52" fill="none" stroke="rgba(0,0,0,.13)" stroke-width="4" />
@@ -207,7 +207,6 @@
 		</div>
 		<p class="end-result-pr" id="end-result">accuracy</p>
 		<p class="end-text-pr" id="end-text">result</p>
-
 		<div class="end-button-pr" id="endButton" onclick="javascript:openSite(linkApp);">Забрать подарок</div>
 	</div>
 
@@ -595,13 +594,6 @@ body {
 		good:"Молодец!<br>Держи 30 дней <br> английского в подарок",
 		bad:"Ты можешь лучше!<br>Держи 30 дней<br>английского в подарок"
 	}
-  var linkStores = {
-		ios:"https://itunes.apple.com/app/bright-english-for-beginners/id1258621855",
-		android:"https://play.google.com/store/apps/details?id=com.engbright"
-	}
-  if (getOS()=="iOS") linkApp = linkStores.ios;
-  if (getOS()=="Android") linkApp = linkStores.android;
-
 	countCard = words.length;
 	var cdInterval;
 
@@ -617,6 +609,15 @@ body {
 	var endText = document.getElementById("end-text");
 	var logo = document.getElementById("logo");
 	var present = document.getElementById("present");
+
+  var linkStores = {
+		ios:"https://itunes.apple.com/app/bright-english-for-beginners/id1258621855",
+		android:"https://play.google.com/store/apps/details?id=com.engbright"
+	}
+  var linkApp = linkStores.android;
+
+  if (getOS()=="iOS") linkApp = linkStores.ios;
+  if (getOS()=="Android") linkApp = linkStores.android;
 
   function getOS() {
     var userAgent = window.navigator.userAgent,
@@ -665,7 +666,6 @@ body {
     countDown();
   }
 
-  //startAd();
   checkMRAID();
 
   // START SCREEN
