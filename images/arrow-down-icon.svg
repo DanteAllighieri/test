@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow-down-icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="arrow-down-icon" fill="#212C42" fill-rule="nonzero">
+            <path d="M4.50315409,0.5 C4.09687758,0.500106705 3.73117365,0.746381525 3.57829495,1.1228249 C3.42541625,1.49926828 3.51584842,1.93081341 3.80699641,2.21419533 L10.0899664,8.49762836 L3.80699641,14.7810616 C3.54617219,15.0314984 3.44110572,15.4033838 3.53231761,15.7532939 C3.62352949,16.103204 3.89676684,16.3764615 4.24665116,16.46768 C4.59653549,16.5588986 4.96839339,16.4538243 5.21881175,16.1929808 L12.2076892,9.20358799 C12.5974369,8.81364995 12.5974369,8.18160676 12.2076892,7.79166873 L5.21881175,0.802275665 C5.03083987,0.609036233 4.77272671,0.500015769 4.50315409,0.5 Z" id="icon" transform="translate(8.000000, 8.500000) scale(-1, -1) rotate(-90.000000) translate(-8.000000, -8.500000) "></path>
+        </g>
+    </g>
+</svg>
