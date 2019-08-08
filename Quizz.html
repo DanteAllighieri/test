@@ -709,10 +709,11 @@ p.nominalBounds = new cjs.Rectangle(-12.4,-3.5,485,107.1);
 			this.gotoAndStop(2);
 		}
 		function fl_MouseDown(event) {
-			this.removeEventListener("touchstart", fl_MouseDown);
+			console.log("mousedown");
+			this.removeEventListener("mousedown", fl_MouseDown);
 			event.currentTarget.gotoAndStop(3);
 		}
-		this.addEventListener("touchstart", fl_MouseDown);
+		this.addEventListener("mousedown", fl_MouseDown);
 	}
 	// actions tween:
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(4));
@@ -1103,12 +1104,12 @@ lib.properties = {
 	color: "#F4F7F9",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/facescreaminginfear_1f631.png?1565260963804", id:"facescreaminginfear_1f631"},
-		{src:"images/facewithopenmouthandcoldsweat_1f630.png?1565260963804", id:"facewithopenmouthandcoldsweat_1f630"},
-		{src:"images/grimacingface_1f62c.png?1565260963804", id:"grimacingface_1f62c"},
-		{src:"images/grinningface_1f600.png?1565260963804", id:"grinningface_1f600"},
-		{src:"images/slightlysmilingface_1f642.png?1565260963804", id:"slightlysmilingface_1f642"},
-		{src:"images/thinkingface_1f914.png?1565260963804", id:"thinkingface_1f914"}
+		{src:"images/facescreaminginfear_1f631.png?1565261649889", id:"facescreaminginfear_1f631"},
+		{src:"images/facewithopenmouthandcoldsweat_1f630.png?1565261649889", id:"facewithopenmouthandcoldsweat_1f630"},
+		{src:"images/grimacingface_1f62c.png?1565261649889", id:"grimacingface_1f62c"},
+		{src:"images/grinningface_1f600.png?1565261649889", id:"grinningface_1f600"},
+		{src:"images/slightlysmilingface_1f642.png?1565261649889", id:"slightlysmilingface_1f642"},
+		{src:"images/thinkingface_1f914.png?1565261649889", id:"thinkingface_1f914"}
 	],
 	preloads: []
 };
